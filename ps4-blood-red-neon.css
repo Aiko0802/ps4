@@ -1,0 +1,36 @@
+/* BLOOD RED NEON — Gamepad Viewer PS4 / DualShock skin */
+/* Use with the PS4 skin. Works best as an editcss override. */
+:root { --blood: #b00020; --deep: #59000e; --white: #fff; }
+html, body { background: transparent !important; }
+/* PS4 Gamepad Viewer uses the .ds4 controller class. */
+.ds4 {
+  filter: grayscale(1) brightness(.82) contrast(1.35)
+          drop-shadow(0 0 6px #b00020)
+          drop-shadow(0 0 17px #7b0015)
+          drop-shadow(0 0 32px #390009);
+  animation: blood-pulse 2.8s ease-in-out infinite;
+  transform-origin: center center;
+}
+@keyframes blood-pulse {
+  0%,100% { filter: grayscale(1) brightness(.82) contrast(1.35) drop-shadow(0 0 5px #b00020) drop-shadow(0 0 13px #7b0015); }
+  50% { filter: grayscale(1) brightness(.92) contrast(1.4) drop-shadow(0 0 12px #ed173d) drop-shadow(0 0 28px #870014) drop-shadow(0 0 40px #43000c); }
+}
+/* Highlights for elements with independent backgrounds; sprite-based buttons may retain original artwork. */
+.ds4 .button.pressed, .ds4 .button.active,
+.ds4 .trigger.pressed, .ds4 .trigger.active,
+.ds4 .bumper.pressed, .ds4 .bumper.active {
+  box-shadow: 0 0 8px #fff, 0 0 18px #e0002b !important;
+}
+/* Animated subtle red halo behind the whole controller. */
+.ds4::before {
+  content: "";
+  position: absolute;
+  inset: 18% 12%;
+  border-radius: 45%;
+  background: radial-gradient(ellipse, rgba(125,0,20,.22), transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+  animation: halo-pulse 2.8s ease-in-out infinite;
+}
+@keyframes halo-pulse { 0%,100% { opacity: .35; } 50% { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .ds4, .ds4::before { animation: none; } }
